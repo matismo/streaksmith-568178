@@ -1,0 +1,39 @@
+:root {
+  color-scheme: dark;
+  --bg: #0b0e13;
+  --card: rgba(255,255,255,0.06);
+  --stroke: rgba(255,255,255,0.12);
+  --text: #e9eef7;
+  --muted: #a9b4c7;
+  --accent: #7c5cff;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0; font-family: Inter, ui-sans-serif, system-ui, -apple-system;
+  background: radial-gradient(1200px 600px at 20% -10%, rgba(124,92,255,0.25), transparent), var(--bg);
+  color: var(--text);
+}
+.page { padding: 48px 24px 80px; max-width: 1100px; margin: 0 auto; }
+.hero { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 28px; align-items: center; }
+.eyebrow { letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); font-size: 12px; }
+h1 { font-size: 44px; margin: 8px 0 12px; }
+.subtitle { color: var(--muted); max-width: 520px; }
+.cta-row { display: flex; gap: 12px; margin-top: 18px; flex-wrap: wrap; }
+.btn {
+  background: var(--accent); color: white; border: none; border-radius: 10px; padding: 12px 18px;
+  font-weight: 600; cursor: pointer; text-decoration: none;
+}
+.btn.ghost { background: transparent; border: 1px solid var(--stroke); }
+.glass { background: var(--card); border: 1px solid var(--stroke); border-radius: 16px; padding: 18px; backdrop-filter: blur(10px); }
+.grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.grid .wide { grid-column: span 2; }
+.grid span { color: var(--muted); font-size: 12px; display: block; margin-bottom: 4px; }
+.mono { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 12px; word-break: break-all; }
+.section { margin-top: 48px; }
+.cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px,1fr)); gap: 14px; }
+.card { background: var(--card); border: 1px solid var(--stroke); border-radius: 12px; padding: 14px; }
+.mint { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 12px; }
+.input { flex: 1; min-width: 260px; padding: 12px; border-radius: 10px; border: 1px solid var(--stroke); background: transparent; color: var(--text); }
+.hint { color: var(--muted); font-size: 13px; }
+.footer { margin-top: 56px; display: flex; justify-content: space-between; color: var(--muted); font-size: 13px; flex-wrap: wrap; gap: 8px; }
+@media (max-width: 860px) { .hero { grid-template-columns: 1fr; } }

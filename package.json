@@ -1,0 +1,25 @@
+{
+  "name": "streaksmith-568178",
+  "description": "StreakSmith is a Base dapp that turns repeat usage into onchain streak badges to improve user retention during activity cooldowns.",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
+  },
+  "dependencies": {
+    "next": "^16.1.6",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "viem": "^2.23.2"
+  },
+  "devDependencies": {
+    "@types/node": "^20",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "eslint": "^9.0.0",
+    "eslint-config-next": "^16.1.6",
+    "typescript": "^5"
+  }
+}
