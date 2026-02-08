@@ -3,26 +3,15 @@
 import { WagmiProvider, createConfig, http } from "wagmi";
 import { injected } from "wagmi/connectors";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-
-const baseSepolia = {
-  id: 84532,
-  name: "Base Sepolia",
-  nativeCurrency: { name: "ETH", symbol: "ETH", decimals: 18 },
-  rpcUrls: {
-    default: { http: ["https://sepolia.base.org"] },
-    public: { http: ["https://sepolia.base.org"] },
-  },
-  blockExplorers: {
-    default: { name: "BaseScan", url: "https://sepolia.basescan.org" },
-  },
-};
+import { baseSepolia } from "viem/chains";
 
 const config = createConfig({
-  chains: [baseSepolia as any],
+  chains: [baseSepolia],
   connectors: [injected()],
   transports: {
     [baseSepolia.id]: http(),
   },
+  ssr: true,
 });
 
 const queryClient = new QueryClient();
