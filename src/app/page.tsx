@@ -2,7 +2,7 @@
 
 import { useAccount, useConnect, useDisconnect, useReadContract, useWriteContract } from "wagmi";
 import { useMemo, useState, type CSSProperties } from "react";
-import { isAddress } from "viem";
+import { isAddress, type Address } from "viem";
 
 const contractAddress = "0x9Be286c48445acacADC282d6c283C3F5d5Ff97cE" as const;
 const contractUrl = `https://sepolia.basescan.org/address/${contractAddress}`;
@@ -62,7 +62,7 @@ const formatAddress = (value?: string) => {
 };
 
 export default function Page() {
-  const { address, isConnected, connector } = useAccount();
+  const { address, isConnected, connector, chain } = useAccount();
   const { connect, connectors, isPending: isConnecting } = useConnect();
   const { disconnect } = useDisconnect();
   const { writeContractAsync, isPending: isMinting } = useWriteContract();
@@ -89,7 +89,8 @@ export default function Page() {
   const primaryConnector = connectors[0];
   const recipient = mintTo.trim() || address || "";
   const isValidRecipient = recipient ? isAddress(recipient) : false;
-  const canMint = isConnected && isOwner && isValidRecipient && !isMinting;
+  const recipientAddress = isValidRecipient ? (recipient as Address) : undefined;
+  const canMint = isConnected && isOwner && Boolean(recipientAddress) && Boolean(address) && Boolean(chain) && !isMinting;
   const showRecipientError = Boolean(mintTo.trim()) && !isValidRecipient;
   const connectDisabled = !primaryConnector || isConnecting;
   const connectLabel = primaryConnector
@@ -99,14 +100,16 @@ export default function Page() {
     : "No wallet detected";
 
   async function handleMint() {
-    if (!recipient || !isValidRecipient) return;
+    if (!recipientAddress || !address || !chain) return;
     setMintError(null);
     try {
       await writeContractAsync({
         address: contractAddress,
         abi,
         functionName: "mintNext",
-        args: [recipient],
+        args: [recipientAddress],
+        account: address,
+        chain,
       });
     } catch (error) {
       setMintError("Mint failed. Check your wallet for details.");
